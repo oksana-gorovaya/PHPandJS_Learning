@@ -10,8 +10,8 @@
 
 $a = 7;
 $b = 10;
-$c = 5;
-$d = 6;
+$c = 3;
+$d = 7;
 
 $inputArrayAB = range($a, $b);
 $inputArrayCD = range($c, $d);
@@ -19,7 +19,7 @@ $rangeString = '';
 $stringToFill = '';
 
 foreach ($inputArrayCD as $value){
-    $rangeString .= "'\t' {$value}";
+    $rangeString .= " \t{$value}";
 }
 
 var_dump($rangeString);
@@ -27,9 +27,9 @@ var_dump($rangeString);
 foreach ($inputArrayAB as $value){
     foreach ($inputArrayCD as $item){
         $tempValue = $item * $value;
-        $stringToFill .= "{$tempValue} \t";
+        $stringToFill .= "{$tempValue}\t";
     }
 
-    var_dump("{$value} \t {$stringToFill}");
+    var_dump("{$value}\t{$stringToFill}");
     $stringToFill = '';
 }

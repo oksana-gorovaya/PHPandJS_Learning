@@ -9,10 +9,10 @@
 строка таблицы.*/
 const _ = require("lodash");
 
-const a = 3;
+const a = 7;
 const b = 10;
 const c = 5;
-const d = 8;
+const d = 7;
 
 const inputArrayAB = _.range(a, b +1);
 const inputArrayCD = _.range(c, d +1);
@@ -20,7 +20,7 @@ let rangeString = '';
 let stringToFill = '';
 
 inputArrayCD.forEach(function(element){
-    rangeString += `\t ${element} \t`
+    rangeString += `\t${element}`
 });
 
 console.log(rangeString);
@@ -28,10 +28,10 @@ console.log(rangeString);
 inputArrayAB.forEach(function(value){
     inputArrayCD.forEach(function(item){
         let tempValue = item * value;
-        stringToFill += `\t ${tempValue} \t`;
+        stringToFill += `${tempValue}\t`;
     });
 
-    console.log(`${value} ${stringToFill}`);
+    console.log(`${value}\t${stringToFill}`);
     stringToFill = ''
 });
 
