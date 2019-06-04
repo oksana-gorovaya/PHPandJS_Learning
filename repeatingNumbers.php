@@ -8,10 +8,11 @@
 
 $userInput = '22 22 22 3 4 4 4 4 4 3 0 0 -2 -2';
 $transformedInput = explode(" ", $userInput);
-$sampleArray = [];
-$userOutput = [];
+var_dump(transformInput($transformedInput));
 
-function transformInput($transformedInput, $sampleArray, $userOutput){
+function transformInput($transformedInput){
+    $sampleArray = [];
+    $userOutput = [];
     foreach ($transformedInput as $item){
         if(in_array($item , $sampleArray)) {
             if(!in_array($item, $userOutput)){
@@ -25,4 +26,3 @@ function transformInput($transformedInput, $sampleArray, $userOutput){
 }
 
 
-var_dump(transformInput($transformedInput, $sampleArray, $userOutput));

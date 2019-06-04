@@ -4,6 +4,7 @@
 
 $userInput = '4 -2 -9';
 $tempArr = explode(" ", $userInput);
+var_dump(showSum($tempArr));
 
 function showSum($numbersArray)
 {
@@ -15,4 +16,3 @@ function showSum($numbersArray)
 }
 
 
-var_dump(showSum($tempArr));

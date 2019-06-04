@@ -6,15 +6,25 @@
 
 Вывод должен содержать одну строку с числами нового списка, разделёнными пробелом.*/
 
-const userInput = "1 3 5 6 10";
+const userInput = "8 3 -3";
 const transformedUserInput = userInput.split(" ");
 
-function showNeighboursSum() {
+if(!transformedUserInput.every(validateInput)) {
+    throw new Error("Enter numbers only");
+}
+console.log(showNeighboursSum(transformedUserInput));
+
+function validateInput(arrayElement){
+    const allowedCharacters = /^[-0-9]+$/;
+    return -1 !== arrayElement.search(allowedCharacters);
+}
+
+function showNeighboursSum(transformedUserInput) {
 
         let userOutput = [];
 
-        if (userInput.length === 1) {
-            return userInput;
+        if (transformedUserInput.length === 1) {
+            return transformedUserInput;
         }
         for (let counter = 0; counter < transformedUserInput.length; counter++) {
 
@@ -33,4 +43,3 @@ function showNeighboursSum() {
         return userOutput.join(" ")
     }
 
-console.log(showNeighboursSum());

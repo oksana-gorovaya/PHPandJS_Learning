@@ -7,8 +7,19 @@
 
 Вывод должен содержать одну строку с числами нового списка, разделёнными пробелом.*/
 
-$userInput = "1 3 5 6 10";
+$userInput = "1 3 -5 6 10";
 $transformedUserInput = explode(" ", $userInput);
+
+if(!array_walk($transformedUserInput, 'validateInput')) {
+    throw new Exception("Enter numbers only");
+} else {
+    var_dump(showNeighboursSum($transformedUserInput));
+}
+
+function validateInput($arrayElement){
+    $allowedCharacters = '/^[-0-9]+$/';
+    return false !== stristr($allowedCharacters, $arrayElement);
+}
 
 function showNeighboursSum($numbersArray)
 {
@@ -35,4 +46,3 @@ function showNeighboursSum($numbersArray)
 
 
 
-var_dump(showNeighboursSum($transformedUserInput));

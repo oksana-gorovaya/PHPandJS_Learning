@@ -7,6 +7,7 @@
 
 const userInput = '22 22 22 3 4 4 4 4 4 3 0 0 -2 -2';
 const transformedInput = userInput.split(" ");
+console.log(transformInput());
 
 function transformInput()
 {
@@ -24,4 +25,3 @@ function transformInput()
 
 }
 
-console.log(transformInput());

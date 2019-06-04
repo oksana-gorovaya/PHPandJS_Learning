@@ -3,6 +3,7 @@
 
 const userInput = '3 7 20 -8';
 let tempArr = userInput.split(" ");
+console.log(showSum());
 
 function showSum()
 {
@@ -13,4 +14,3 @@ function showSum()
     return inputSum
 }
 
-console.log(showSum());
