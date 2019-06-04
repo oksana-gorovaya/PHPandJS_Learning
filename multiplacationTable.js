@@ -21,7 +21,7 @@ function buildHeader(){
     inputArrayCD.forEach(function(element){
         rangeString += `\t${element}`
     });
-    return rangeString
+    return rangeString;
 }
 
 function buildTable(){
@@ -35,7 +35,7 @@ function buildTable(){
         result += `${value}\t${stringToFill} \n`;
         stringToFill = ''
     });
-    return result
+    return result;
 }
 
 console.log(buildHeader());

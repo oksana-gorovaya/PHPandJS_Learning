@@ -22,7 +22,7 @@ function buildHeader($inputArrayCD){
     foreach ($inputArrayCD as $value){
         $rangeString .= " \t{$value}";
     }
-    return "${rangeString} \n";
+    return $rangeString ."\n";
 }
 
 function buildTable($inputArrayAB, $stringToFill, $inputArrayCD){
@@ -32,7 +32,7 @@ function buildTable($inputArrayAB, $stringToFill, $inputArrayCD){
             $stringToFill .= $item * $value ."\t";
         }
 
-        $result .= "{$value}\t{$stringToFill}\n";
+        $result .= $value . "\t" .$stringToFill . "\n";
         $stringToFill = '';
     }
     return $result;
