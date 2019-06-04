@@ -15,7 +15,6 @@ const c = 5;
 const d = 7;
 const inputArrayCD = _.range(c, d + 1);
 const inputArrayAB = _.range(a, b + 1);
-let stringToFill = '';
 
 function buildHeader(){
     let rangeString = '';
@@ -26,11 +25,11 @@ function buildHeader(){
 }
 
 function buildTable(){
+    let stringToFill = '';
     let result = '';
     inputArrayAB.forEach(function(value){
         inputArrayCD.forEach(function(item){
-            let tempValue = item * value;
-            stringToFill += `${tempValue}\t`;
+            stringToFill += item * value + '\t';
         });
 
         result += `${value}\t${stringToFill} \n`;

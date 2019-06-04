@@ -29,8 +29,7 @@ function buildTable($inputArrayAB, $stringToFill, $inputArrayCD){
     $result = '';
     foreach ($inputArrayAB as $value){
         foreach ($inputArrayCD as $item){
-            $tempValue = $item * $value;
-            $stringToFill .= "{$tempValue}\t";
+            $stringToFill .= $item * $value ."\t";
         }
 
         $result .= "{$value}\t{$stringToFill}\n";
