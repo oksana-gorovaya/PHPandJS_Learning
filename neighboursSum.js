@@ -10,11 +10,12 @@ const userInput = "1 3 5 6 10";
 const transformedUserInput = userInput.split(" ");
 
 function showNeighboursSum() {
-    let userOutput = [];
 
-    if (userInput.length === 1) {
-        userOutput.push(userInput[0]);
-    } else {
+        let userOutput = [];
+
+        if (userInput.length === 1) {
+            return userInput;
+        }
         for (let counter = 0; counter < transformedUserInput.length; counter++) {
 
             if (counter === 0) {
@@ -31,6 +32,5 @@ function showNeighboursSum() {
         }
         return userOutput.join(" ")
     }
-}
 
 console.log(showNeighboursSum());
