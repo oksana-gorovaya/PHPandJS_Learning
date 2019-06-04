@@ -9,30 +9,36 @@
 строка таблицы.*/
 const _ = require("lodash");
 
-const a = 7;
+const a = 5;
 const b = 10;
 const c = 5;
 const d = 7;
-
-const inputArrayAB = _.range(a, b +1);
 const inputArrayCD = _.range(c, d +1);
-let rangeString = '';
+const inputArrayAB = _.range(a, b +1);
 let stringToFill = '';
 
-inputArrayCD.forEach(function(element){
-    rangeString += `\t${element}`
-});
-
-console.log(rangeString);
-
-inputArrayAB.forEach(function(value){
-    inputArrayCD.forEach(function(item){
-        let tempValue = item * value;
-        stringToFill += `${tempValue}\t`;
+function buildHeader(){
+    let rangeString = '';
+    inputArrayCD.forEach(function(element){
+        rangeString += `\t${element}`
     });
+    return rangeString
+}
 
-    console.log(`${value}\t${stringToFill}`);
-    stringToFill = ''
-});
+function buildTable(){
+    let result = '';
+    inputArrayAB.forEach(function(value){
+        inputArrayCD.forEach(function(item){
+            let tempValue = item * value;
+            stringToFill += `${tempValue}\t`;
+        });
 
+        result += `${value}\t${stringToFill} \n`;
+        stringToFill = ''
+    });
+    return result
+}
+
+console.log(buildHeader());
+console.log(buildTable());
 

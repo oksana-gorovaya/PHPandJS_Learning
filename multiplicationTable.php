@@ -8,28 +8,36 @@
 Заметьте, что левым столбцом и верхней строкой выводятся сами числа из заданных отрезков — заголовочные столбец и
 строка таблицы.*/
 
-$a = 7;
+$a = 5;
 $b = 10;
-$c = 3;
+$c = 5;
 $d = 7;
 
 $inputArrayAB = range($a, $b);
 $inputArrayCD = range($c, $d);
-$rangeString = '';
 $stringToFill = '';
 
-foreach ($inputArrayCD as $value){
-    $rangeString .= " \t{$value}";
-}
-
-var_dump($rangeString);
-
-foreach ($inputArrayAB as $value){
-    foreach ($inputArrayCD as $item){
-        $tempValue = $item * $value;
-        $stringToFill .= "{$tempValue}\t";
+function buildHeader($inputArrayCD){
+    $rangeString = '';
+    foreach ($inputArrayCD as $value){
+        $rangeString .= " \t{$value}";
     }
-
-    var_dump("{$value}\t{$stringToFill}");
-    $stringToFill = '';
+    return "${rangeString} \n";
 }
+
+function buildTable($inputArrayAB, $stringToFill, $inputArrayCD){
+    $result = '';
+    foreach ($inputArrayAB as $value){
+        foreach ($inputArrayCD as $item){
+            $tempValue = $item * $value;
+            $stringToFill .= "{$tempValue}\t";
+        }
+
+        $result .= "{$value}\t{$stringToFill}\n";
+        $stringToFill = '';
+    }
+    return $result;
+}
+
+echo(buildHeader($inputArrayCD));
+echo(buildTable($inputArrayAB, $stringToFill, $inputArrayCD));
