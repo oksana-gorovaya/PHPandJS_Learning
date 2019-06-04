@@ -13,8 +13,8 @@ const a = 5;
 const b = 10;
 const c = 5;
 const d = 7;
-const inputArrayCD = _.range(c, d +1);
-const inputArrayAB = _.range(a, b +1);
+const inputArrayCD = _.range(c, d + 1);
+const inputArrayAB = _.range(a, b + 1);
 let stringToFill = '';
 
 function buildHeader(){
