@@ -5,16 +5,16 @@
 Например, в строке "acggtgttat" процентное содержание символов G и C равно 4/10⋅100=40.0, где 4 -- это количество
 символов G и C,  а 10 -- это длина строки.*/
 
-$stringToCheck = 'acggtgttat';
-$counter = 0;
-$gcContaining = 0;
-$tempArray = str_split(strtoupper($stringToCheck));
+$stringToCheck = 'acggtgtggtat';
+var_dump(calculateGC($stringToCheck));
 
-foreach ($tempArray as $element){
-    if ($element  === 'G' || $element === 'C'){
-        $counter += 1;
+function calculateGC($stringToCheck){
+    $counter = 0;
+    $tempArray = str_split(strtolower($stringToCheck));
+    foreach ($tempArray as $element){
+        if ($element  === 'g' || $element === 'c'){
+            $counter += 1;
+        }
     }
+    return $counter / strlen($stringToCheck) * 100;
 }
-
-$gcContaining = $counter / strlen($stringToCheck) * 100;
-var_dump($gcContaining);

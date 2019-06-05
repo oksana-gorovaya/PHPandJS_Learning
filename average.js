@@ -8,18 +8,20 @@
 На вход программе подаются интервалы, внутри которых всегда есть хотя бы одно число, которое делится на 3.﻿*/
 const _ = require("lodash");
 
-const first_number = 1;
-const second_number = 7;
-const range = _.range(first_number, second_number +1);
-let amount = 0;
-let numbers_sum = 0;
+const firstNumber = 4;
+const secondNumber = 7;
+console.log(calculateAverage(firstNumber, secondNumber));
 
-range.forEach(function(element){
-    if (element % 3 === 0){
-        amount += 1;
-        numbers_sum += element;
-    }
-});
+function calculateAverage(firstNumber, secondNumber){
+    const range = _.range(firstNumber, secondNumber + 1);
+    let counter = 0;
+    let numbersSum = 0;
 
-console.log(numbers_sum / amount);
-
+    range.forEach(function(element){
+        if (element % 3 === 0){
+            counter += 1;
+            numbersSum += element;
+        }
+    });
+    return numbersSum / counter
+}

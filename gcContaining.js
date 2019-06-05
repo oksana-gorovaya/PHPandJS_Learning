@@ -6,15 +6,16 @@
 символов G и C,  а 10 -- это длина строки.*/
 
 const stringToCheck = 'acggtgtggtat';
-let counter = 0;
-let gcContaining;
-let tempArray = stringToCheck.toUpperCase().split('');
+console.log(calculateGC(stringToCheck));
 
-tempArray.forEach(function(element){
-    if (element === 'G' || element === 'C'){
-        counter += 1;
-    }
-});
+function calculateGC(stringToCheck){
+    let counter = 0;
+    let tempArray = stringToCheck.toLowerCase().split('');
+    tempArray.forEach(function(element){
+        if (element === 'g' || element === 'c'){
+            counter += 1;
+        }
+    });
 
-gcContaining = counter / stringToCheck.length * 100;
-console.log(gcContaining);
+    return counter / stringToCheck.length * 100;
+}

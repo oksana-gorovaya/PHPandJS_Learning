@@ -6,31 +6,38 @@ s = 'aaaabbсaa' преобразуется в 'a4b2с1a2', то есть гру
 последовательность на стандартный вывод. Кодирование должно учитывать регистр символов.*/
 
 const DNA_sample = 'aaaaabcaa';
-let DNA_coded = '';
 let temp_str = '';
-const arr = Array.from(DNA_sample);
-let counter = 0;
+const result = groupElements(DNA_sample, temp_str);
+console.log(countDuplicates(result));
 
-arr.forEach(function(item){
-    if (counter === 0){
-        temp_str += item;
-        counter += 1;
+function groupElements(DNA_sample, temp_str){
+    const arr = Array.from(DNA_sample);
+    let counter = 0;
 
-    }
-    else if (arr[counter] !== arr[counter - 1]){
-        temp_str += `,${item}`;
-        counter += 1;
+    arr.forEach(function(item){
+        if (counter === 0){
+            temp_str += item;
+            counter += 1;
 
-    }
+        }
+        else if (arr[counter] !== arr[counter - 1]){
+            temp_str += ','+item;
+            counter += 1;
 
-    else{
-        temp_str += item;
-        counter += 1;
-    }
-});
+        }
 
-temp_array = temp_str.split(',');
-temp_array.forEach(function(element){
-    DNA_coded += `${element[0]}${element.length}`
-});
-console.log(DNA_coded);
+        else{
+            temp_str += item;
+            counter += 1;
+        }
+    });
+    return temp_str;
+}
+function countDuplicates(result){
+    let DNA_coded = '';
+    const temp_array = result.split(',');
+    temp_array.forEach(function(element){
+        DNA_coded += element[0]+element.length
+    });
+    return DNA_coded;
+}

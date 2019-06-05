@@ -7,33 +7,42 @@ s = 'aaaabbсaa' преобразуется в 'a4b2с1a2', то есть гру
     Напишите программу, которая считывает строку, кодирует её предложенным алгоритмом и выводит закодированную
 последовательность на стандартный вывод. Кодирование должно учитывать регистр символов.*/
 
-$DNA_sample = 'aaabcaa';
-$DNA_coded = '';
+$DNA_sample = 'aaaaabaaa';
 $temp_str = '';
-$arr = str_split($DNA_sample);
-$counter = 0;
+$result = groupElements($DNA_sample, $temp_str);
+var_dump(countDuplicates($result));
 
-foreach ($arr as $item){
-    if ($counter === 0){
-        $temp_str .= $item;
-        $counter += 1;
+function groupElements($DNA_sample, $temp_str){
+    $arr = str_split($DNA_sample);
+    $counter = 0;
 
-    }
-    elseif ($arr[$counter] !== $arr[$counter - 1]){
-        $temp_str .= ",${item}";
-        $counter += 1;
-    }
+    foreach ($arr as $item){
+        if ($counter === 0){
+            $temp_str .= $item;
+            $counter += 1;
 
-    else{
-        $temp_str .= $item;
-        $counter += 1;
-    }
-};
+        }
+        elseif ($arr[$counter] !== $arr[$counter - 1]){
+            $temp_str .= "," . $item;
+            $counter += 1;
+        }
 
-$temp_array = explode(",", $temp_str);
+        else{
+            $temp_str .= $item;
+            $counter += 1;
+        }
+    };
+    return $temp_str;
+}
 
-foreach($temp_array as $element){
-    $elementNumber = strlen($element);
-    $DNA_coded .= "${element[0]}${elementNumber}";
-};
-echo($DNA_coded);
+function countDuplicates($result){
+    $DNA_coded = '';
+    $temp_array = explode(",", $result);
+
+    foreach($temp_array as $element){
+        $elementNumber = strlen($element);
+        $DNA_coded .= $element[0].$elementNumber;
+    };
+    return $DNA_coded;
+}
+
