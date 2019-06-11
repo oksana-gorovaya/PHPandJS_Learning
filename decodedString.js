@@ -11,10 +11,13 @@ try {
     encodedFile = fs.readFileSync('/home/xenia/Завантаження/dataset_3363_2.txt', 'utf8');
 
 } catch(e) {
-    console.log('Error:', e.stack);
+    throw new Error("Cannot read file");
 }
-
 const pattern = /[a-zA-Z]/;
+const splitedInput = splitInput(encodedFile, pattern);
+const sortedLetters = sortLetters(splitedInput, pattern);
+const sortedNumbers = sortNumbers(splitedInput, pattern);
+const restoredBlocks = formDecodedString(sortedLetters, sortedNumbers);
 
 function splitInput(encodedFile, pattern)
 {
@@ -33,37 +36,52 @@ function splitInput(encodedFile, pattern)
 
 }
 
-function separateCharacters(splitedInput, pattern)
+function sortLetters(splitedInput, pattern)
 {
-    let result = [];
     let letters = [];
-    let numbers = [];
-
     splitedInput.forEach(function(item){
         const tempArray = item.split('');
         tempArray.forEach(function(element){
             if (element.match(pattern)){
                 letters.push(element);
-            } else{
+            }
+        });
+    });
+    return letters;
+}
+
+function sortNumbers(splitedInput, pattern)
+{
+    let numbers = [];
+    splitedInput.forEach(function(item){
+        const tempArray = item.split('');
+        tempArray.forEach(function(element){
+            if (element.match(pattern) === null){
                 numbers.push(element);
             }
         });
     });
-
-    numbers.shift();
-
-    let jointNumbers = numbers.join('');
-    let splitedNumbers = jointNumbers.split(',');
-
-    letters.forEach(function (element) {
+    return numbers;
+}
+function ownTrimWithBlackJack (arr)
+{
+    if(arr[0] === ','){
+        arr.shift()
+    }
+    return arr
+}
+function formDecodedString(sortedLetters, sortedNumbers)
+{
+    let result = [];
+    const jointNumbers = ownTrimWithBlackJack(sortedNumbers).join('');
+    const splitedNumbers = jointNumbers.split(',');
+    sortedLetters.forEach(function (element) {
         result.push(element.repeat(splitedNumbers.shift()))
 
     });
 
     return result.join('');
 }
-const splitedInput = splitInput(encodedFile, pattern);
-const restoredBlocks = separateCharacters(splitedInput, pattern);
 
 fs.writeFile('/home/xenia/PhpstormProjects/decodedJS.txt', restoredBlocks, (err) => {
     if (err) console.log(err);
