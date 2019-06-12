@@ -84,6 +84,8 @@ function formDecodedString(sortedLetters, sortedNumbers)
 }
 
 fs.writeFile('/home/xenia/PhpstormProjects/decodedJS.txt', restoredBlocks, (err) => {
-    if (err) console.log(err);
+    if (err) {
+        throw Error('File cannot be written')
+    }
     console.log("Successfully Written to File.");
 });
