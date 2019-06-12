@@ -47,9 +47,9 @@ function removeName($studentsList)
 function findAverageGrade($studentsGradesList)
 {
     $arr = [];
-    $counter = 0;
     foreach ($studentsGradesList as $item){
         $grades = 0;
+        $counter = count($item);
         foreach ($item as $element){
             $grades += $element;
             $counter = count($item);

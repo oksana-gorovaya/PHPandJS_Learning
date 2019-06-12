@@ -61,9 +61,9 @@ function findAverageGrade(studentsGradesList)
     let counter = 0;
     studentsGradesList.forEach(function (item) {
         let grades = 0;
+        counter = item.length;
         item.forEach(function (element) {
             grades += parseInt(element);
-            counter = item.length;
         });
         let average = grades / counter;
         arr.push(average+"\n");
