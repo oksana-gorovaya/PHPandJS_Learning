@@ -38,8 +38,6 @@ function sortLetters($splitedInput, $pattern = "/[a-zA-Z]/")
         foreach($tempArray as $element){
             if (preg_match($pattern, $element) === 1){
                 array_push($letters, $element);
-            } else{
-                continue;
             }
         }
     }
