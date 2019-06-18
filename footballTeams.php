@@ -8,7 +8,7 @@
 Первая_команда;Забито_первой_командой;Вторая_команда;Забито_второй_командой
 Вывод программы необходимо оформить следующим образом:
 Команда:Всего_игр Побед Ничьих Поражений Всего_очков
-'Зенит;3;Спартак;1', 'Спартак;1;ЦСКА;1', 'ЦСКА;0;Зенит;2'*/
+'Зенит;3;Спартак;1', 'ЦСКА;1;Спартак;1', 'ЦСКА;0;Зенит;2'*/
 $gamesTotal = readline();
 $initialTable = [];
 
@@ -28,9 +28,11 @@ function createMatchTableTemplate($initialTable)
 
     foreach ($initialTable as $item){
         foreach (explode(';', $item) as $element){
-            if (preg_match('/[a-zA-zа-Я]/', $element) && (in_array($element, array_keys($gamesTemplate)))){
+            $checkInArray = in_array($element, array_keys($gamesTemplate));
+
+            if (preg_match('/[a-zA-zа-яА-Я\s-]/', $element) && ($checkInArray)){
                 continue;
-            } else if (preg_match('/[a-zA-zа-Я]/', $element) && (!in_array($element, array_keys($gamesTemplate)))){
+            } else if (preg_match('/[a-zA-zа-яА-Я\s-]/', $element) && (!$checkInArray)){
                 $gamesTemplate[$element] = ['games_played' => 0, 'won' => 0, 'drawn' => 0, 'lost' => 0, 'points' => 0];
             } else if (preg_match('/[0-9]/', $element)){
             } else {
@@ -52,7 +54,7 @@ function preprocessTableData($initialTable, $matchTable)
         $keysArray = [];
         $valuesArray = [];
         foreach ($item as $element){
-            if (preg_match('/[a-zA-zа-Я]/', $element)){
+            if (preg_match('/[a-zA-zа-яА-Я\s-]/', $element)){
                 array_push($keysArray, $element);
             } else {
                 array_push($valuesArray, intval($element));
@@ -68,19 +70,18 @@ function preprocessTableData($initialTable, $matchTable)
 
 function updateMatchTable($games, $valuesArray, $matchTable)
 {
-    foreach ($games as $item){
-        foreach ($item as $key => $value){
-            $matchTable[$key]['games_played'] += 1;
+    foreach ($games as $game){
+        foreach ($game as $footballTeam => $score){
+            $matchTable[$footballTeam]['games_played'] += 1;
 
-            if (($value === $valuesArray[0]) && ($value === $valuesArray[1])){
-               // var_dump('draw');
-                $matchTable[$key]['drawn'] += 1;
-                $matchTable[$key]['points'] += 1;
-            } else if ($value === max($valuesArray)){
-                $matchTable[$key]['won'] += 1;
-                $matchTable[$key]['points'] += 3;
+            if (($score === $valuesArray[0]) && ($score === $valuesArray[1])){
+                $matchTable[$footballTeam]['drawn'] += 1;
+                $matchTable[$footballTeam]['points'] += 1;
+            } else if ($score === max($valuesArray)){
+                $matchTable[$footballTeam]['won'] += 1;
+                $matchTable[$footballTeam]['points'] += 3;
             } else {
-                $matchTable[$key]['lost'] += 1;
+                $matchTable[$footballTeam]['lost'] += 1;
             }
         }
     }
