@@ -17,12 +17,13 @@ while (sizeof($initialTable) < $gamesTotal)
     $anotherGame = readline();
     array_push($initialTable, $anotherGame);
 }
-$matchTable = createMatchTableTemplate($initialTable);
-$updatedTable = preprocessTableData($initialTable, $matchTable);
+$pattern = '/[a-zA-zа-яА-Я\s-]/';
+$matchTable = createMatchTableTemplate($initialTable, $pattern);
+$updatedTable = preprocessTableData($initialTable, $matchTable, $pattern);
 $output = formatResults($updatedTable);
-file_put_contents('/home/xenia/PhpstormProjects/footballTable.txt', $output);
+file_put_contents(readline(), $output);
 
-function createMatchTableTemplate($initialTable)
+function createMatchTableTemplate($initialTable, $pattern)
 {
     $gamesTemplate = [];
 
@@ -30,9 +31,9 @@ function createMatchTableTemplate($initialTable)
         foreach (explode(';', $item) as $element){
             $checkInArray = in_array($element, array_keys($gamesTemplate));
 
-            if (preg_match('/[a-zA-zа-яА-Я\s-]/', $element) && ($checkInArray)){
+            if (preg_match($pattern, $element) && ($checkInArray)){
                 continue;
-            } else if (preg_match('/[a-zA-zа-яА-Я\s-]/', $element) && (!$checkInArray)){
+            } else if (preg_match($pattern, $element) && (!$checkInArray)){
                 $gamesTemplate[$element] = ['games_played' => 0, 'won' => 0, 'drawn' => 0, 'lost' => 0, 'points' => 0];
             } else if (preg_match('/[0-9]/', $element)){
             } else {
@@ -44,7 +45,7 @@ function createMatchTableTemplate($initialTable)
     return $gamesTemplate;
 }
 
-function preprocessTableData($initialTable, $matchTable)
+function preprocessTableData($initialTable, $matchTable, $pattern)
 {
     $arr = [];
     foreach ($initialTable as $item) {
@@ -54,7 +55,7 @@ function preprocessTableData($initialTable, $matchTable)
         $keysArray = [];
         $valuesArray = [];
         foreach ($item as $element){
-            if (preg_match('/[a-zA-zа-яА-Я\s-]/', $element)){
+            if (preg_match($pattern, $element)){
                 array_push($keysArray, $element);
             } else {
                 array_push($valuesArray, intval($element));
