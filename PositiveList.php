@@ -1,38 +1,32 @@
 <?php
 class NonPositiveError extends Exception{
-    public function __construct($message = null, $code = 0) {
-        echo $message;
-    }
 }
 
 class PositiveList
 {
     private $numberCollection = [];
 
-    public function add($arr)
+    public function add(array $arr): void
     {
         foreach ($arr as  $item){
             if ($item > 0){
                 array_push($this->numberCollection, $item);
-            } else {
-                throw new NonPositiveError;
             }
+            throw new NonPositiveError;
         }
     }
 
-    public function getCollection()
+    public function getCollection(): array
     {
         return $this->numberCollection;
     }
 
-    public function array_push($inputNumber)
+    public function array_push(int $inputNumber): void
     {
-        if ($inputNumber <= 0){
-            throw new NonPositiveError;
-        } else{
+        if ($inputNumber >= 0){
             array_push($this->numberCollection, $inputNumber);
         }
-
+        throw new NonPositiveError;
     }
 
 }

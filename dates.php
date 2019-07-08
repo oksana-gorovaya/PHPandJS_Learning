@@ -8,12 +8,12 @@ $outputDate = $date->format('Y-m-d') . "\n";
 $formattedOutputDate = formatOutputDate($outputDate);
 echo $formattedOutputDate;
 
-function formatInputDate($inputDate)
+function formatInputDate(string $inputDate): string
 {
     return str_replace(' ', '-', $inputDate);
 }
 
-function formatOutputDate($outputDate)
+function formatOutputDate(string $outputDate): string
 {
     return str_replace('-', ' ', $outputDate);
 }

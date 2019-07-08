@@ -1,28 +1,31 @@
 <?php
 class DirectoriesCollection
 {
-    function __construct($pathToArchive, $archiveName)
+    private $pathToArchive;
+    private $archiveName;
+    private $path;
+    function __construct(string $pathToArchive, string $archiveName)
     {
-        $this->$pathToArchive = $pathToArchive;
+        $this->pathToArchive = $pathToArchive;
         $this->archiveName = $archiveName;
         $this->path = sys_get_temp_dir() . '/' . $archiveName;
         $this->extractArchive($pathToArchive);
 
     }
 
-    private function extractArchive($pathToArchive)
+    private function extractArchive(string $pathToArchive): void
     {
         $zip = new ZipArchive();
-        $extractedData = $zip->open($pathToArchive);
-        if ($extractedData) {
+        if ($zip->open($pathToArchive)) {
             $zip->extractTo(sys_get_temp_dir());
             $zip->close();
-        } else {
-            throw new Exception('cannot extract from archive');
+            return;
         }
+        throw new Exception('cannot extract from archive');
+
     }
 
-    private function removeTempDir($path)
+    private function removeTempDir(string $path): void
     {
         if (is_dir($path)) {
             $objects = scandir($path);
@@ -38,7 +41,7 @@ class DirectoriesCollection
         }
     }
 
-    public function showDirectories($extension, $outputFile)
+    public function showDirectories(string $extension, string $outputFile): string
     {
         $objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->path), RecursiveIteratorIterator::SELF_FIRST);
         $directories = [];
@@ -47,9 +50,7 @@ class DirectoriesCollection
             if (pathinfo($name, PATHINFO_EXTENSION) === $extension){
                 $withoutName = str_replace($name, '', $location);
                 $withoutParent = str_replace(sys_get_temp_dir() . '/', '', $withoutName);
-                if (in_array($withoutParent, $directories)){
-                    continue;
-                }  else {
+                if (!in_array($withoutParent, $directories)){
                     array_push($directories, $withoutParent . "\n");
                 }
             }
