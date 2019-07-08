@@ -4,13 +4,13 @@ class DirectoriesCollection
     private $pathToArchive;
     private $archiveName;
     private $path;
+
     function __construct(string $pathToArchive, string $archiveName)
     {
         $this->pathToArchive = $pathToArchive;
         $this->archiveName = $archiveName;
         $this->path = sys_get_temp_dir() . '/' . $archiveName;
         $this->extractArchive($pathToArchive);
-
     }
 
     private function extractArchive(string $pathToArchive): void
@@ -22,7 +22,6 @@ class DirectoriesCollection
             return;
         }
         throw new Exception('cannot extract from archive');
-
     }
 
     private function removeTempDir(string $path): void
